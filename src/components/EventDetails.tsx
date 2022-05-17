@@ -1,7 +1,8 @@
 import { Box, Button, Card, Dialog, Modal, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { AddActivity } from "./AddActivity";
 import { AddEvent } from "./AddEvent";
+import { IActivity, IEvent as IEvent } from "../interfaces/types";
 
 
 const style = {
@@ -14,9 +15,15 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
-export const EventDetails = () => {
+export const EventDetails = ({ selectedEvent, activities, events, setEvents, setActivities }:
+    {
+        selectedEvent: string, activities: IActivity[], events: IEvent[],
+        setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>,
+        setActivities: React.Dispatch<React.SetStateAction<IActivity[]>>
+    }) => {
+
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -33,11 +40,11 @@ export const EventDetails = () => {
             marginLeft: "10px", marginRight: "10px"
         }}>
             <h3>
-                Selected Event Details
+                {selectedEvent === "" ? "Please select an event!" : selectedEvent}
             </h3>
             <div style={{ alignContent: "center" }}>
-                    <Button variant="outlined" onClick={handleEventOpen}>+ Add Event</Button>
-                    <Button variant="outlined" onClick={handleActivityOpen} style={{ marginLeft: "20px" }}>+ Add Activity</Button>
+                <Button variant="outlined" onClick={handleEventOpen}>+ Add Event</Button>
+                <Button variant="outlined" onClick={handleActivityOpen} style={{ marginLeft: "20px" }}>+ Add Activity</Button>
 
             </div>
 
@@ -46,11 +53,11 @@ export const EventDetails = () => {
                 onClose={handleEventClose}
                 fullScreen={fullScreen}
                 fullWidth={true}
-                // aria-labelledby="modal-modal-title"
-                // aria-describedby="modal-modal-description"
+            // aria-labelledby="modal-modal-title"
+            // aria-describedby="modal-modal-description"
             >
-            <AddEvent/>
-        
+                <AddEvent setEvents={setEvents} events={events} setAddEventOpen={setAddEventOpen}/>
+
             </Dialog>
 
             <Dialog
@@ -58,10 +65,10 @@ export const EventDetails = () => {
                 onClose={handleActivityClose}
                 fullScreen={fullScreen}
                 fullWidth={true}
-                // aria-labelledby="modal-modal-title"
-                // aria-describedby="modal-modal-description"
+            // aria-labelledby="modal-modal-title"
+            // aria-describedby="modal-modal-description"
             >
-            <AddActivity/>
+                <AddActivity setActivities={setActivities} />
             </Dialog>
 
         </div>

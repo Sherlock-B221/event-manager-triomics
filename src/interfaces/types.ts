@@ -4,7 +4,7 @@ export interface IActivity {
     description: string;
 }
 
-export interface IEvents {
+export interface IEvent {
     id: string;
     name: string;
     description: string;

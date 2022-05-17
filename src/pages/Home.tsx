@@ -9,7 +9,7 @@ import { Activities } from "../components/Activities/Activities";
 import { EventDetails } from "../components/EventDetails";
 import { Container } from "../components/Container";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { IActivity, IEvents } from "../interfaces/types";
+import { IActivity, IEvent } from "../interfaces/types";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const activitiesAr: IActivity[] = [
+const activitiesArr: IActivity[] = [
     {
         "id": 1,
         "name": "Take Blood Sample",
@@ -58,12 +58,17 @@ const eventsArr: any[] = [
 
 export const Home = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
-    const [activities2, setActivities2] = useState<IActivity[]>([]);
     const [selectedEvent, setSelectedEvent] = useState<string>("");
-    const [events, setEvents] = useState<IEvents[]>([]);
+    const [events, setEvents] = useState<IEvent[]>([]);
 
-
-
+    const eventChanged = (elemId: string) => {
+        const eventIndx = events.findIndex((e) => e.id === elemId);
+        setActivities([...activitiesArr].map(activity => {
+            activity.id = activity.id + eventIndx
+            return activity
+        }))
+        setSelectedEvent(elemId);
+    }
 
     const onDragEnd = (result: DropResult) => {
         if (!selectedEvent) {
@@ -79,24 +84,29 @@ export const Home = () => {
 
         let add, active = activities;
 
-        if (source.droppableId === "dropContainer2") {
+        if (source.droppableId === "dropContainer1") {
             add = active[source.index];
             const newEventIndex = events.findIndex(e => e.id === selectedEvent)
-            const newEvents = [...eventsArr];
+            const newEvents = [...events];
             newEvents[newEventIndex].activities!.push(add);
             setEvents(() => newEvents)
         }
     }
+
     useEffect(() => {
         // GET request using axios inside useEffect React hook
         // axios.get(url)
         //     .then(response => console.log(response));
         eventsArr.forEach(obj => obj["activities"] = [])
         setEvents(eventsArr)
-        setActivities(activitiesAr)
+        setActivities(activitiesArr);
+        console.log("here 0")
     }, []);
+
     useEffect(() => {
-        setActivities([...activitiesAr])
+        setActivities([...activitiesArr]);
+        console.log("here1");
+        
     }, [selectedEvent]);
 
     const event = (events.find(e => e.id === selectedEvent) ?? { name: "", activities: [] });
@@ -109,14 +119,19 @@ export const Home = () => {
             </div>
             <Toolbar />
             <DragDropContext onDragEnd={onDragEnd}>
-
                 <div style={{ marginLeft: "242px", minHeight: "100%" }}>
                     <Grid container spacing={2} style={{ padding: "10px" }}>
                         <Grid item xs={12}>
-                            <EventDetails />
+                            <EventDetails
+                                selectedEvent={event.name ?? "N/A"}
+                                setEvents={setEvents}
+                                setActivities={setActivities}
+                                activities={activities}
+                                events={events}
+                            />
                         </Grid>
                         <Grid item xs={3} >
-                            <Events events={events} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
+                            <Events events={events} selectedEvent={selectedEvent} setSelectedEvent={eventChanged} />
                         </Grid>
                         <Grid item xs={6}>
                             <Container activities={event.activities!} />

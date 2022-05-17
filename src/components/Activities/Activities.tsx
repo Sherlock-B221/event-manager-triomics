@@ -1,12 +1,13 @@
 import { Card, Paper, TextField } from "@mui/material";
 import { IActivity } from "../../interfaces/types";
 import "./activities.scss"
-import React from "react";
+import React, { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { DraggableCard } from "./DraggableCard";
 
-export const Activities = ( {activities}: {activities : IActivity[]} ) => {
-  
+export const Activities = ({ activities }: { activities: IActivity[] }) => {
+  const [searchValue, setSearchValue] = useState("");
+
   return <Droppable
     droppableId="dropContainer1"
   >
@@ -18,14 +19,13 @@ export const Activities = ( {activities}: {activities : IActivity[]} ) => {
           <h4 style={{ display: "flex", justifyContent: "center", margin: "3px" }}>
             Activities
           </h4>
-          <TextField label="search" style={{ padding: "3px" }} />
+          <TextField label="search" style={{ padding: "3px" }} onChange={(e) => { setSearchValue(e.target.value) }} />
           {
-            activities.map((activity, index) =>
-              
-              <DraggableCard activity={activity} index={index} />)
-
+            activities.filter((activity) => activity.name.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((activity, index) =>
+                <DraggableCard activity={activity} index={index} key={activity.id} />)
           }
-
+          {provided.placeholder}
         </Paper>
     }
   </Droppable>
