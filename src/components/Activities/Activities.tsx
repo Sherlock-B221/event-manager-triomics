@@ -19,7 +19,7 @@ export const Activities = ({ activities }: { activities: IActivity[] }) => {
           <h4 style={{ display: "flex", justifyContent: "center", margin: "3px" }}>
             Activities
           </h4>
-          <TextField label="search" style={{ padding: "3px" }} onChange={(e) => { setSearchValue(e.target.value) }} />
+          <TextField label="search" style={{ margin: "4px" ,padding: "3px", width: "95%" }} onChange={(e) => { setSearchValue(e.target.value) }} />
           {
             activities.filter((activity) => activity.name.toLowerCase().includes(searchValue.toLowerCase()))
               .map((activity, index) =>

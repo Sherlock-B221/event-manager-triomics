@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-const activitiesArr: IActivity[] = [
+let activitiesArr: IActivity[] = [
     {
         "id": 1,
         "name": "Take Blood Sample",
@@ -61,9 +61,14 @@ export const Home = () => {
     const [selectedEvent, setSelectedEvent] = useState<string>("");
     const [events, setEvents] = useState<IEvent[]>([]);
 
+    const activitiesChanged = (activities: IActivity[]) => {
+        activitiesArr = [...activities]
+        setActivities(activitiesArr)
+    }
+
     const eventChanged = (elemId: string) => {
         const eventIndx = events.findIndex((e) => e.id === elemId);
-        setActivities([...activitiesArr].map(activity => {
+        setActivities([...activities].map(activity => {
             activity.id = activity.id + eventIndx
             return activity
         }))
@@ -125,7 +130,7 @@ export const Home = () => {
                             <EventDetails
                                 selectedEvent={event.name ?? "N/A"}
                                 setEvents={setEvents}
-                                setActivities={setActivities}
+                                setActivities={activitiesChanged}
                                 activities={activities}
                                 events={events}
                             />

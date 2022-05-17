@@ -1,13 +1,22 @@
 import { Button, Card, Grid, TextField, Toolbar } from "@mui/material";
-import React from "react";
+import React, { useId, useState } from "react";
+import { IEvent } from "../interfaces/types";
 
-export const AddEvent = () => {
+export const AddEvent = ({ setEvents, events ,setAddEventOpen }: { setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>, events: IEvent[], setAddEventOpen: any }) => {
+  const [nameData, setNameData] = useState("");
+  const [descriptionData, setDescriptionData] = useState("");
+  const id = useId()
 
+  const handleAddEvent = () => {
+    setEvents([...events, { id, name: nameData, description: descriptionData, activities: [] }]);
+    setAddEventOpen(false);
+  };
 
   return <>
     <Card style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "auto", width: "auto", padding: "15px" }}>
       <form
         // className={classes.form}
+        onSubmit={(e) => {e.preventDefault()}}
         noValidate>
         <Grid container spacing={2}>
           <Grid item xs={12} >
@@ -16,6 +25,7 @@ export const AddEvent = () => {
               name="eventName"
               variant="outlined"
               required
+              onChange={(e) => { setNameData(e.target.value) }}
               fullWidth
               id="eventName"
               label="Event Name"
@@ -26,6 +36,7 @@ export const AddEvent = () => {
             <TextField
               variant="outlined"
               required
+              onChange={(e) => { setDescriptionData(e.target.value) }}
               fullWidth
               id="eventDescription"
               label="Event Description"
@@ -40,6 +51,7 @@ export const AddEvent = () => {
           fullWidth
           variant="contained"
           color="primary"
+          onClick={handleAddEvent}
         // className={classes.submit}
         >
           Add Event

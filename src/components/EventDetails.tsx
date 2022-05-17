@@ -21,7 +21,7 @@ export const EventDetails = ({ selectedEvent, activities, events, setEvents, set
     {
         selectedEvent: string, activities: IActivity[], events: IEvent[],
         setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>,
-        setActivities: React.Dispatch<React.SetStateAction<IActivity[]>>
+        setActivities: (activities: IActivity[]) => void
     }) => {
 
     const theme = useTheme();
@@ -68,7 +68,7 @@ export const EventDetails = ({ selectedEvent, activities, events, setEvents, set
             // aria-labelledby="modal-modal-title"
             // aria-describedby="modal-modal-description"
             >
-                <AddActivity setActivities={setActivities} />
+                <AddActivity setActivities={setActivities} activities={activities} setAddActivityOpen={setAddActivityOpen} />
             </Dialog>
 
         </div>

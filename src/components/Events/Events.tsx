@@ -11,7 +11,7 @@ export const Events = ({ events, selectedEvent, setSelectedEvent }: { events: IE
         <h4 style={{ display: "Flex", justifyContent: "center", margin: "3px" }}>
             Events
         </h4>
-        <TextField label="search" style={{ padding: "3px" }} onChange={(e) => { setSearchValue(e.target.value) }} />
+        <TextField label="search" style={{  margin: "4px" ,padding: "3px", width: "95%" }} onChange={(e) => { setSearchValue(e.target.value) }} />
         {
             events.filter((event) => event.name.toLowerCase().includes(searchValue.toLowerCase()))
                 .map((event) =>
