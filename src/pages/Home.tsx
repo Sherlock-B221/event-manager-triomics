@@ -1,9 +1,13 @@
-import { Grid } from "@mui/material"
+import { Grid, Toolbar } from "@mui/material"
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import React from "react"
 import { NavBar } from "../components/AppBar/NavBar"
 import { SideDrawer } from "../components/SideDrawer/SideDrawer"
+import { Events } from "../components/Events/Events";
+import { Activities } from "../components/Activities/Activities";
+import { EventDetails } from "../components/EventDetails";
+import { Container } from "../components/Container";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -21,19 +25,20 @@ export const Home = () => {
                 <NavBar/>
                 <SideDrawer/>
             </div>
-            <div style={{ marginLeft: "242px"}}>
-                <Grid container spacing={2} >
+            <Toolbar/>
+            <div style={{ marginLeft: "242px", minHeight: "100%"}}>
+                <Grid container spacing={2} style={{padding: "10px"}}>
                     <Grid item xs={12}>
-                        <Item>Selected Event Details</Item>
+                        <EventDetails/>
                     </Grid>
-                    <Grid item xs={3}>
-                        <Item>List of Events </Item>
+                    <Grid item xs={3} >
+                        <Events />
                     </Grid>
                     <Grid item xs={6}>
-                        <Item>Droppable Container</Item>
+                        <Container/>
                     </Grid>
                     <Grid item xs={3}>
-                        <Item>List of Activities</Item>
+                        <Activities/>
                     </Grid>
                 </Grid>
             </div>
