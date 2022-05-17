@@ -7,9 +7,9 @@ export const NavBar = () => {
     
     return <AppBar position="absolute" style={{zIndex: 30}}>
         <Toolbar variant="dense">
-        {/* <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}> */}
-        {/* </IconButton> */}
-        Event Manager
+        <h3 style={{display: "flex", justifyContent: "center"}}>
+           Event Manager
+        </h3>
         </Toolbar>
     </AppBar>
 
