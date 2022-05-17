@@ -4,19 +4,19 @@ import React, { useEffect, useState } from "react";
 import { IEvents } from "../../interfaces/types";
 import axios from "axios";
 
-export const Events = () => {
-    const events: any[] = [
-        {
-          "id": "73749978-00fc-4699-adef-18f755754ee2",
-          "name": "Day 1",
-          "description": "First day of the enrollment of the subject"
-        },
-        {
-          "id": "c33a4a43-47df-45b9-b654-acfad22b7079",
-          "name": "Day 7",
-          "description": "Seventh day of the enrollment of the subject"
-        }
-      ]
+export const Events = ({events, selectedEvent, setSelectedEvent}:{events : IEvents[], selectedEvent: string, setSelectedEvent: any}) => {
+    // const events: any[] = [
+    //     {
+    //       "id": "73749978-00fc-4699-adef-18f755754ee2",
+    //       "name": "Day 1",
+    //       "description": "First day of the enrollment of the subject"
+    //     },
+    //     {
+    //       "id": "c33a4a43-47df-45b9-b654-acfad22b7079",
+    //       "name": "Day 7",
+    //       "description": "Seventh day of the enrollment of the subject"
+    //     }
+    //   ]
     // const [events, setEvents] =  useState([{}]);
 
     // const url = "http://tfams429.dev.triomics.in/api/events"
@@ -39,10 +39,8 @@ export const Events = () => {
         </h4>
         <TextField label="search" style={{padding: "3px"}} />
         {
-            events.map( (event) =>
-            <Card className="selectableCard"  >
+            events.map( (event) => <Card className="selectableCard"  >
                 {event.name}
-                {/* asjkdfh */}
             </Card>
             )
         }
