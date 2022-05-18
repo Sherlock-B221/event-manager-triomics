@@ -1,6 +1,4 @@
 import { Grid, Toolbar } from "@mui/material"
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from "react"
 import { NavBar } from "../components/AppBar/NavBar"
 import { SideDrawer } from "../components/SideDrawer/SideDrawer"
@@ -11,14 +9,6 @@ import { Container } from "../components/Container";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { IActivity, IEvent } from "../interfaces/types";
 
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
 
 let activitiesArr: IActivity[] = [
     {
@@ -114,7 +104,7 @@ export const Home = () => {
         
     }, [selectedEvent]);
 
-    const event = (events.find(e => e.id === selectedEvent) ?? { name: "", activities: [] });
+    const event = (events.find(e => e.id === selectedEvent) ?? { name: "", activities: [], description: "" });
 
     return (
         <div>
@@ -128,7 +118,7 @@ export const Home = () => {
                     <Grid container spacing={2} style={{ padding: "10px" }}>
                         <Grid item xs={12}>
                             <EventDetails
-                                selectedEvent={event.name ?? "N/A"}
+                                selectedEvent={event.name}
                                 setEvents={setEvents}
                                 setActivities={activitiesChanged}
                                 activities={activities}
@@ -139,7 +129,7 @@ export const Home = () => {
                             <Events events={events} selectedEvent={selectedEvent} setSelectedEvent={eventChanged} />
                         </Grid>
                         <Grid item xs={6}>
-                            <Container activities={event.activities!} />
+                            <Container activities={event.activities!} selectedEvent={event.description} events={events} />
                         </Grid>
                         <Grid item xs={3}>
                             <Activities activities={activities} />

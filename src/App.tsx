@@ -1,18 +1,16 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { NavBar } from './components/AppBar/NavBar';
-import { SideDrawer } from './components/SideDrawer/SideDrawer';
 import { Home } from './pages/Home';
 
 function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#075E54" //teal green dark
+        main: "#3700b3" //teal green dark
       },
       secondary: {
-        main: "#25D366" //light green
+        main: "#6200ee" //light green
       }
     }
   })

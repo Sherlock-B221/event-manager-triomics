@@ -1,21 +1,11 @@
-import { Box, Button, Card, Dialog, Modal, Paper, Typography, useMediaQuery, useTheme } from "@mui/material";
-import React, { useState } from "react";
+import { Button, Dialog, Paper, useMediaQuery, useTheme } from "@mui/material";
+import React from "react";
 import { AddActivity } from "./AddActivity";
 import { AddEvent } from "./AddEvent";
-import { IActivity, IEvent as IEvent } from "../interfaces/types";
+import { IActivity, IEvent } from "../interfaces/types";
 
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+
 
 export const EventDetails = ({ selectedEvent, activities, events, setEvents, setActivities }:
     {
@@ -56,7 +46,7 @@ export const EventDetails = ({ selectedEvent, activities, events, setEvents, set
             // aria-labelledby="modal-modal-title"
             // aria-describedby="modal-modal-description"
             >
-                <AddEvent setEvents={setEvents} events={events} setAddEventOpen={setAddEventOpen}/>
+                <AddEvent setEvents={setEvents} events={events} setAddEventOpen={setAddEventOpen} />
 
             </Dialog>
 

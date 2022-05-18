@@ -1,14 +1,12 @@
 import { Button, Card, Grid, TextField, Toolbar } from "@mui/material";
-import React, { useId, useState } from "react";
+import React, { useState } from "react";
 import { IActivity } from "../interfaces/types";
 
 export const AddActivity = ({ setActivities, activities, setAddActivityOpen }: { setActivities: (activities: IActivity[]) => void, activities: IActivity[], setAddActivityOpen: any }) => {
   const [nameData, setNameData] = useState("");
   const [descriptionData, setDescriptionData] = useState("");
-  const id = useId()
-
   const handleAddActivity = () => {
-    setActivities([...activities, { id: activities.length + 1, name: nameData, description: descriptionData }]);
+    setActivities([...activities, { id: activities.length + 2, name: nameData, description: descriptionData }]);
     setAddActivityOpen(false);
   };
 

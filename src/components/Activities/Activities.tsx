@@ -1,4 +1,4 @@
-import { Card, Paper, TextField } from "@mui/material";
+import { Paper, TextField } from "@mui/material";
 import { IActivity } from "../../interfaces/types";
 import "./activities.scss"
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ export const Activities = ({ activities }: { activities: IActivity[] }) => {
           <h4 style={{ display: "flex", justifyContent: "center", margin: "3px" }}>
             Activities
           </h4>
-          <TextField label="search" style={{ margin: "4px" ,padding: "3px", width: "95%" }} onChange={(e) => { setSearchValue(e.target.value) }} />
+          <TextField color="secondary" label="search" size="small" style={{ margin: "4px", padding: "3px", width: "95%" }} onChange={(e) => { setSearchValue(e.target.value) }} />
           {
             activities.filter((activity) => activity.name.toLowerCase().includes(searchValue.toLowerCase()))
               .map((activity, index) =>

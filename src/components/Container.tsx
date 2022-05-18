@@ -1,10 +1,10 @@
 import { Paper } from "@mui/material";
 import { Droppable } from "react-beautiful-dnd";
 import React from "react";
-import { IActivity } from "../interfaces/types";
+import { IActivity, IEvent } from "../interfaces/types";
 import { DraggableCard } from "./Activities/DraggableCard";
 
-export const Container = ({ activities }: { activities: IActivity[] }) => {
+export const Container = ({ activities, selectedEvent, events }: { activities: IActivity[], selectedEvent : string, events: IEvent[] }) => {
 
     return <Droppable droppableId="dropContainer2" >
         {
@@ -14,7 +14,8 @@ export const Container = ({ activities }: { activities: IActivity[] }) => {
                         ref={provided.innerRef}
                         {...provided.droppableProps}>
                         <h4 style={{ display: "flex", justifyContent: "center", margin: "3px" }}>
-                            Container
+                        {selectedEvent === "" ? "Activities in the selected event" : selectedEvent}
+                            
                         </h4>
                         {
                             activities.map((activity, index) =>

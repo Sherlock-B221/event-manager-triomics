@@ -1,15 +1,15 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { IconButton, Toolbar } from '@mui/material';
+import { Toolbar } from '@mui/material';
 
 
 export const NavBar = () => {
-    
-    return <AppBar position="absolute" style={{zIndex: 30}}>
+
+    return <AppBar position="absolute" style={{ zIndex: 30, display: "flex", alignItems: "center" }}>
         <Toolbar variant="dense">
-        <h3 style={{display: "flex", justifyContent: "center"}}>
-           Event Manager
-        </h3>
+            <h3>
+                Event Manager App
+            </h3>
         </Toolbar>
     </AppBar>
 

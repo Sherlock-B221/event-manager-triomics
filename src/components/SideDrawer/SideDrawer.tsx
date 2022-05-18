@@ -1,7 +1,6 @@
 import React from "react"
 import Drawer from '@mui/material/Drawer';
-import { Toolbar } from "@mui/material";
-
+import "./side-drawer.scss"
 const drawerWidth = 240;
 
 export const SideDrawer = () => {
@@ -15,6 +14,6 @@ export const SideDrawer = () => {
     anchor="left"
     style={{position:'relative', zIndex: 1}}
   >
-    <h1 style={{marginTop: "4rem"}}>Side Drawer</h1>   
+    <h2 className="sideDrawer">Side Drawer</h2>   
   </Drawer>
 }
