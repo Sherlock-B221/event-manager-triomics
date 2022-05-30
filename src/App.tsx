@@ -15,18 +15,14 @@ function App() {
     }
   })
   return (
-    // <Router>
-    //   <Routes>
-    //     <div className="App">
-    //       <NavBar/>
-    //       <SideDrawer/>
-    //     </div>  
-    //   </Routes>
-    // </Router>
-    <ThemeProvider theme={theme}>
-      <Home/>
-    </ThemeProvider>
-    
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path='/' element= { <Home/> }></Route>
+        </Routes>
+      </ThemeProvider>
+    </Router>
+
   );
 }
 

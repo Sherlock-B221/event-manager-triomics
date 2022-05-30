@@ -8,6 +8,7 @@ import { EventDetails } from "../components/EventDetails";
 import { Container } from "../components/Container";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { IActivity, IEvent } from "../interfaces/types";
+import axios from "axios";
 
 
 let activitiesArr: IActivity[] = [
@@ -44,6 +45,7 @@ const eventsArr: any[] = [
         "description": "Seventh day of the enrollment of the subject"
     }
 ]
+const url = "http://tfams429.dev.triomics.in/"
 
 
 export const Home = () => {
@@ -90,8 +92,8 @@ export const Home = () => {
 
     useEffect(() => {
         // GET request using axios inside useEffect React hook
-        // axios.get(url)
-        //     .then(response => console.log(response));
+        axios.get(url)
+            .then(response => console.log(response));
         eventsArr.forEach(obj => obj["activities"] = [])
         setEvents(eventsArr)
         setActivities(activitiesArr);
